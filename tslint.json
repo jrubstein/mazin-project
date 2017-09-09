@@ -1,0 +1,16 @@
+{
+  "extends": ["tslint:latest", "tslint-react"],  
+  "rules": {
+    "no-unused-variable": [
+        true
+      ],
+      "quotemark": [
+        true,
+        "single"
+      ],
+      "semicolon": [
+        true,
+        "never"
+      ]
+    }
+  }
