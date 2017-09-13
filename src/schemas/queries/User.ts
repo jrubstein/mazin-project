@@ -3,7 +3,7 @@ import {
     GraphQLID,
     GraphQLNonNull,
     GraphQLFieldConfig
-  } from 'graphql';
+  } from 'graphql'
 
 import { UserType, UsersType } from '../types/User'
 

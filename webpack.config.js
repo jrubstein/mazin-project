@@ -5,7 +5,7 @@ var path = require('path'),
 module.exports = {
   entry: {
     index: path.join(__dirname, 'src' , 'assets', 'index.tsx'),
-    // commons: ['react', 'react-dom']
+    commons: ['react', 'react-dom']
   },
   output: {
       path: path.join(__dirname, 'dist' , 'assets'),
@@ -22,11 +22,16 @@ module.exports = {
       ]
   },
   plugins: [
+    new webpack.DefinePlugin({
+      'process.env': {
+        NODE_ENV: JSON.stringify('production')
+      }
+    }),
     new webpack.HotModuleReplacementPlugin(),
     new HtmlWebpackPlugin({
       template: path.join(__dirname, 'src' , 'assets', 'templates', 'index.html')
     }),
-  //  new webpack.optimize.UglifyJsPlugin(),
-  //  new webpack.optimize.CommonsChunkPlugin({ name: 'commons', filename: '[hash].js' })
+   new webpack.optimize.UglifyJsPlugin(),
+   new webpack.optimize.CommonsChunkPlugin({ name: 'commons', filename: 'commons-[hash].js' })
   ]
 };

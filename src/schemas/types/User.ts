@@ -1,42 +1,42 @@
 import {
     graphql,
-    GraphQLSchema,
-    GraphQLObjectType,
-    GraphQLString,
-    GraphQLNonNull,
     GraphQLID,
+    GraphQLInputObjectType,
     GraphQLList,
-    GraphQLInputObjectType
-  } from 'graphql';
+    GraphQLNonNull,
+    GraphQLObjectType,
+    GraphQLSchema,
+    GraphQLString,
+  } from 'graphql'
 
 export const UserType = new GraphQLObjectType({
-    name: 'user',
     fields: {
         _id: {
-            type: new GraphQLNonNull(GraphQLID)
-        },
-        name: {
-            type: GraphQLString
+            type: new GraphQLNonNull(GraphQLID),
         },
         description: {
-            type: GraphQLString
-        }
-    }
+            type: GraphQLString,
+        },
+        name: {
+            type: GraphQLString,
+        },
+    },
+    name: 'user',
 })
 
 export const UsersType = new GraphQLList(UserType)
 
 export const UserDTO = new GraphQLInputObjectType({
-    name: 'userDTO',
     fields: {
         _id: {
-            type: GraphQLID
-        },
-        name: {
-            type: new GraphQLNonNull(GraphQLString)
+            type: GraphQLID,
         },
         description: {
-            type: new GraphQLNonNull(GraphQLString)
-        }
-    }
+            type: new GraphQLNonNull(GraphQLString),
+        },
+        name: {
+            type: new GraphQLNonNull(GraphQLString),
+        },
+    },
+    name: 'userDTO',
 })
