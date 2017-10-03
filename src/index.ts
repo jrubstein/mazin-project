@@ -6,6 +6,7 @@ import * as bodyParser from 'koa-bodyparser'
 import { render } from 'koa-ejs'
 import * as KoaRouter from 'koa-router'
 import * as path from 'path'
+import * as IO from 'socket.io'
 import { Schema } from './schemas'
 
 const myGraphQLSchema = null
@@ -26,4 +27,24 @@ router.get('/', async (context: any) => {
 app.use(router.routes())
 app.use(router.allowedMethods())
 
-app.listen(PORT, () => console.log(`Listening at ${PORT}`))
+// tslint:disable-next-line:no-console
+const server = app.listen(PORT, () => console.log(`Listening at ${PORT}`))
+const io = IO(server)
+
+// tslint:disable-next-line:no-console
+console.log('waiting for connections')
+
+io.on('connection', (socket) => {
+    // tslint:disable-next-line:no-console
+    console.log('connected', socket.id)
+    let index = 0
+    setInterval(() => {
+        socket.emit('data', {
+            id: 'some cool id',
+            payload: {
+                index,
+            },
+        })
+        index++
+    }, 1000)
+})
